@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="color:deeppink;font-weight: 600;"></div>
+
+<script>
+  // 1.获取元素
+  var div = document.querySelector('div');
+  // 2. 得到当前的小时数
+  var nowTime = new Date();
+  var h = nowTime.getHours();
+  // 3. 判断小时数,改变文字信息
+  if (h <= 4) {
+    div.innerHTML = "夜已深，Mydear注意休息哦！"
+  } else if (h <= 7) {
+    div.innerHTML = "亲爱的EmilyChen，早安呀！"
+  } else if (h <= 12) {
+    div.innerHTML = "早起的虫子有鸟吃，开启美好的一天叭！"
+  } else if (h <= 13) {
+    div.innerHTML = "诶嘿嘿，是时候午休咯！"
+  } else if (h <= 18) {
+    div.innerHTML = "亲爱的EmilyChen，午安呐！"
+  } else if (h <= 21) {
+    div.innerHTML = "亲爱的EmilyChen，晚安哟！"
+  } else {
+    div.innerHTML = "晚安全世界，晚安EmilyChen！"
+  }
+</script>
+</body>
+</html>

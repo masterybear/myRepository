@@ -1,0 +1,65 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.treeCase.mapper.BrandMapper">
+
+    <resultMap id="BrandMap" type="org.example.treeCase.model.Brand">
+        <result column="brand_name" property="brandName"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+
+    <select id="queryInfo" resultMap="BrandMap">
+        select * from tb_brand
+        <where>
+            <if test="brand.companyName != null and brand.companyName != '' ">
+                and company_name like #{brand.companyName}
+            </if>
+            <if test="brand.brandName != null and brand.brandName != '' ">
+                and brand_name like #{brand.brandName}
+            </if>
+            <if test="brand.state != null">
+                and state = #{brand.state}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryInfoByPage" resultMap="BrandMap">
+        select * from tb_brand
+        <where>
+            <if test="brand.companyName != null and brand.companyName != '' ">
+                and company_name like #{brand.companyName}
+            </if>
+            <if test="brand.brandName != null and brand.brandName != '' ">
+                and brand_name like #{brand.brandName}
+            </if>
+            <if test="brand.state != null">
+                and state = #{brand.state}
+            </if>
+        </where>
+        LIMIT #{begin},#{size};
+    </select>
+
+    <select id="selectTotalCount" resultType="java.lang.Integer" >
+
+        select COUNT(*) from tb_brand
+        <where>
+            <if test="brand.companyName != null and brand.companyName != '' ">
+                and company_name like #{brand.companyName}
+            </if>
+            <if test="brand.brandName != null and brand.brandName != '' ">
+                and brand_name like #{brand.brandName}
+            </if>
+            <if test="brand.state != null">
+                and state = #{brand.state}
+            </if>
+        </where>
+    </select>
+
+    <delete id="delById">
+        delete from tb_brand where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
